@@ -49,29 +49,4 @@ public class JsonTreeReaderTest extends TestCase {
     in.skipValue();
     assertEquals(JsonToken.END_DOCUMENT, in.peek());
   }
-  
-  /** Test cases by applying the basic path algorithm **/
-  public void testPeek_basicPath() throws IOException {
-    /* path 1: json null object */
-    JsonTreeReader nullInstance = new JsonTreeReader(JsonNull.INSTANCE);
-    assertEquals(JsonToken.NULL, nullInstance.peek());
-    
-    /* path 2: json primitive */
-    JsonTreeReader primitiveInstance = new JsonTreeReader(new JsonPrimitive(5));
-    assertEquals(JsonToken.NUMBER, primitiveInstance.peek());
-    
-    /* path 3: json object */
-    JsonTreeReader objectInstance = new JsonTreeReader(new JsonObject());
-    assertEquals(JsonToken.BEGIN_OBJECT, objectInstance.peek());
-    
-    /* path 4: iterator */
-    /* create an object */
-    JsonArray jsonArray = new JsonArray();
-    jsonArray.add(1);
-    jsonArray.add("2");
-    
-    JsonTreeReader iteratorInstance = new JsonTreeReader(jsonArray);
-    iteratorInstance.beginArray();
-    assertEquals(JsonToken.NUMBER, iteratorInstance.peek());
-  }
 }
